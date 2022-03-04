@@ -7,7 +7,7 @@ export default function Navbar(props) {
     <AppBar
       elevation="none"
       position="fixed"
-      sx={{ xs: 12, bgcolor: "#249EA0", pt: 1 }}
+      sx={{ xs: 12, bgcolor: "#7349AC", pt: 1 }}
     >
       <Box>
         <IconButton sx={{ color: "#fff" }}>

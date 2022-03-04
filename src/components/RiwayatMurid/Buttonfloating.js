@@ -9,7 +9,7 @@ export const SaveButton = {
   width: "95%",
   padding: "8px 70px",
   lineHeight: 1.5,
-  backgroundColor: "#249EA0",
+  backgroundColor: "#F78104",
   fontFamily: [
     "Roboto",
     "poppins",
@@ -18,13 +18,13 @@ export const SaveButton = {
     "sans-serif",
   ].join(","),
   "&:hover": {
-    backgroundColor: "#25B8BB",
+    backgroundColor: "#F78104",
     padding: "9px 71px",
     boxShadow: "none",
   },
   "&:active": {
     boxShadow: "none",
-    backgroundColor: "#249EA0",
+    backgroundColor: "#F78104",
     borderColor: "#005cbf",
   },
   "&:focus": {
