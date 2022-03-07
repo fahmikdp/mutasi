@@ -10,7 +10,7 @@ import {
 import { SaveButton } from "../components/RiwayatMurid/Buttonfloating";
 import Navbar from "../components/Navbar";
 
-import logoMutasi from "../img/logo2.jpeg";
+import logoMutasi from "../img/logo.png";
 import Cards from "../components/Card";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -35,7 +35,10 @@ export default function riwayatmurid() {
             }}
           >
             <ListItem>
-              <img src={logoMutasi} style={{ marginRight: "19px" }} />
+              <img
+                src={logoMutasi}
+                style={{ marginRight: "17px", width: 25 }}
+              />
               <Box sx={{ display: "block" }}>
                 <Typography color="text.secondary" sx={{ fontSize: 12 }}>
                   12 Maret 2016
@@ -47,7 +50,10 @@ export default function riwayatmurid() {
             </ListItem>
             <Divider variant="inset" component="li" />
             <ListItem>
-              <img src={logoMutasi} style={{ marginRight: "19px" }} />
+              <img
+                src={logoMutasi}
+                style={{ marginRight: "17px", width: 25 }}
+              />
               <Box sx={{ display: "block" }}>
                 <Typography color="text.secondary" sx={{ fontSize: 12 }}>
                   28 Januari 2018
@@ -71,8 +77,8 @@ export default function riwayatmurid() {
             </ListItem>
           </List>
         </Box>
-        {/* Button Floating */}
 
+        {/* Button Floating */}
         <AppBar
           position="fixed"
           sx={{
@@ -89,7 +95,7 @@ export default function riwayatmurid() {
               width: "95%",
             }}
           >
-            <Link to="/mutasi">
+            <Link to="/mutasi" style={{ textDecoration: "none" }}>
               <Button variant="contained" disableRipple sx={SaveButton}>
                 Mutasi
               </Button>

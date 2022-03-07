@@ -5,6 +5,7 @@ export const SaveButton = {
   boxShadow: "none",
   textTransform: "none",
   fontSize: 15,
+  fontWeight: 200,
   letterSpacing: "1px",
   width: "95%",
   padding: "8px 70px",
