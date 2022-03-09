@@ -26,7 +26,7 @@ export const SaveButton = {
   "&:active": {
     boxShadow: "none",
     backgroundColor: "#F78104",
-    borderColor: "#005cbf",
+    borderColor: "#F78104",
   },
   "&:focus": {
     boxShadow: "0 0 0 0.2rem rgba(0,123,255,.5)",
