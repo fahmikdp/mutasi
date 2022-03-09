@@ -20,8 +20,8 @@ export const calendar = {
     height: 40.5,
   },
   "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
-    border: "1.5px solid",
-    // borderColor: "grey",
+    border: "1.5px solid #7349AC",
+    // borderColor: "#7349AC",
     borderRadius: 2,
   },
   "&:hover .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
@@ -32,6 +32,9 @@ export const calendar = {
   },
   "& .MuiOutlinedInput-root.Mui-error .MuiOutlinedInput-notchedOutline": {
     borderColor: "grey",
+  },
+  "& svg": {
+    color: "#7349AC",
   },
 };
 

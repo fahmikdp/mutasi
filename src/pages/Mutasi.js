@@ -7,11 +7,13 @@ import {
   Typography,
   TextField,
   Stack,
+  IconButton,
 } from "@mui/material";
 import { SaveButton } from "../components/RiwayatMurid/Buttonfloating";
 import Navbar from "../components/Navbar";
 import Cards from "../components/Card";
 import { Link } from "react-router-dom";
+import { ArrowBackTwoTone } from "@mui/icons-material";
 
 // Select
 import {
@@ -19,7 +21,12 @@ import {
   calendar,
   datePicker,
 } from "../components/Mutasi/styleform";
-import { MenuProps, provinsi, cabang } from "../components/Mutasi/DataSelect";
+import {
+  MenuProps,
+  provinsi,
+  cabang,
+  dojo,
+} from "../components/Mutasi/DataSelect";
 import { useTheme } from "@mui/material/styles";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import MenuItem from "@mui/material/MenuItem";
@@ -30,212 +37,247 @@ import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DesktopDatePicker from "@mui/lab/DesktopDatePicker";
 
-function getStyles(name, personName, theme) {
-  return {
-    fontWeight:
-      personName.indexOf(name) === -1
-        ? theme.typography.fontWeightRegular
-        : theme.typography.fontWeightMedium,
-  };
-}
-
 export default function Mutasi() {
-  const theme = useTheme();
-  const [personName, setPersonName] = useState([]);
+  const [dojoAsal, setDojoAsal] = useState("");
+  const [alasanPindah, setAlasanPindah] = useState("");
   const [tanggalmutasi, setTanggalmutasi] = useState("");
 
   const [selectedProvinsi, setProvinsi] = useState("");
+  const [filterCabang, setFilterCabang] = useState([]);
 
+  const [selectedCabang, setCabang] = useState("");
+  const [filterDojo, setFilterDojo] = useState([]);
+
+  const [selectedDojo, setDojo] = useState("");
+
+  const handleSubmit = function (event) {
+    event.preventDefault();
+    console.log(
+      `\n`,
+      `Dojo Asal: ${dojoAsal}`,
+      `\n`,
+      `Provinsi: ${selectedProvinsi}`,
+      `\n`,
+      `Cabang: ${selectedCabang}`,
+      `\n`,
+      `Dojo: ${selectedDojo}`,
+      `\n`,
+      `Alasan Pindah: ${alasanPindah}`,
+      `\n`,
+      `Rencana Pindah: ${tanggalmutasi}`
+    );
+  };
+
+  // SELECT FILTER
   const handleSelectProvinsi = (newValue) => {
     setProvinsi(newValue);
     console.log(newValue);
+    const filtercabang = cabang.filter((e) => e.idprovinsi === newValue);
+    console.log(filtercabang);
+    setFilterCabang(filtercabang);
   };
 
+  const handleSelectCabang = (newValue) => {
+    setCabang(newValue);
+    console.log(newValue);
+    const filterdojo = dojo.filter((e) => e.idcabang === newValue);
+    console.log(filterdojo);
+    setFilterDojo(filterdojo);
+  };
+
+  const handleSelectDojo = (newValue) => {
+    setDojo(newValue);
+    console.log(newValue);
+  };
+
+  // DATEPICKER
   const handleDate = (newValue) => {
     setTanggalmutasi(newValue);
   };
 
-  const handleChange = (event) => {
-    const {
-      target: { value },
-    } = event;
-    setPersonName(
-      // On autofill we get a stringified value.
-      typeof value === "string" ? value.split(",") : value
-    );
-  };
-
   return (
     <>
-      <Link to="/">
-        <Navbar>&nbsp;Permintaan Mutasi</Navbar>
-      </Link>
-      <Container>
-        <Box sx={{ flexGrow: 1, mt: 8 }}>
-          <Cards />
-        </Box>
-        <Typography sx={{ fontSize: 14, mt: 2 }}>Dojo Asal</Typography>
-        <TextField
-          placeholder="Terakoya Dojo"
-          type="text"
-          sx={textfield}
-          inputProps={{
-            style: {
-              fontSize: 15,
-              height: 5,
-            },
-          }}
-        ></TextField>
-        <Typography sx={{ fontSize: 14, mt: 1 }}>Dojo Baru</Typography>
-
-        {/* SELECT */}
-        <FormControl sx={textfield}>
-          <Select
-            sx={{ height: 40, fontSize: 15 }}
-            displayEmpty
-            value={selectedProvinsi}
-            onChange={handleSelectProvinsi}
-            input={<OutlinedInput />}
-            // renderValue={(selected) => {
-            //   if (selected.length === 0) {
-            //     return <p>Pilih Provinsi</p>;
-            //   }
-
-            //   //   return selected.join(", ");
-            // }}
-            MenuProps={MenuProps}
-            inputProps={{ "aria-label": "Without label" }}
-          >
-            {provinsi.map((name) => (
-              <MenuItem
-                sx={{ fontSize: 15, height: 10 }}
-                key={name}
-                value={name}
-                style={getStyles(name, personName, theme)}
-              >
-                {name}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-
-        {/* Select 2 */}
-        <FormControl sx={textfield}>
-          <Select
-            sx={{ height: 40, fontSize: 15 }}
-            displayEmpty
-            value={personName}
-            onChange={handleChange}
-            // input={<OutlinedInput />}
-            renderValue={(selected) => {
-              if (selected.length === 0) {
-                return <p>Pilih Cabang</p>;
-              }
-
-              return selected.join(", ");
+      <Navbar>
+        <Link to="/" style={{ textDecoration: "none" }}>
+          <IconButton sx={{ color: "#fff" }}>
+            <ArrowBackTwoTone />
+            <Typography sx={{ fontFamily: "Roboto", fontWeight: 500 }}>
+              &nbsp;Permintaan Mutasi
+            </Typography>
+          </IconButton>
+        </Link>
+      </Navbar>
+      <form onSubmit={handleSubmit}>
+        <Container>
+          <Box sx={{ flexGrow: 1, mt: 8 }}>
+            <Cards />
+          </Box>
+          <Typography sx={{ fontSize: 14, mt: 2 }}>Dojo Asal</Typography>
+          <TextField
+            placeholder="Terakoya Dojo"
+            type="text"
+            value={dojoAsal}
+            onChange={(e) => setDojoAsal(e.target.value)}
+            sx={textfield}
+            inputProps={{
+              style: {
+                fontSize: 15,
+                height: 5,
+              },
             }}
-            MenuProps={MenuProps}
-            inputProps={{ "aria-label": "Without label" }}
-          >
-            {cabang.map((dojo) => (
-              <MenuItem
-                sx={{ fontSize: 15, height: 10 }}
-                key={dojo}
-                value={dojo}
-                // style={getStyles(dojo, personName, theme)}
-              >
-                {dojo}
+          ></TextField>
+          <Typography sx={{ fontSize: 14, mt: 1 }}>Dojo Baru</Typography>
+
+          {/* SELECT */}
+          <FormControl sx={textfield}>
+            <Select
+              sx={{ height: 40, fontSize: 15 }}
+              displayEmpty
+              value={selectedProvinsi}
+              onChange={(e) => handleSelectProvinsi(e.target.value)}
+              // input={<OutlinedInput />}
+
+              MenuProps={MenuProps}
+              inputProps={{ "aria-label": "Without label" }}
+            >
+              <MenuItem value="" disabled>
+                <p>Pilih Provinsi</p>
               </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
+              {provinsi.map((name) => (
+                <MenuItem
+                  sx={{
+                    fontSize: 15,
+                    height: {
+                      xs: 3,
+                    },
+                  }}
+                  key={name.id}
+                  value={name.name}
+                >
+                  {name.name}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
 
-        {/* SELECT 3 */}
-        <FormControl sx={textfield}>
-          <Select
-            sx={{ height: 40, fontSize: 15 }}
-            displayEmpty
-            value={personName}
-            onChange={handleChange}
-            input={<OutlinedInput />}
-            renderValue={(selected) => {
-              if (selected.length === 0) {
-                return <p>Pilih Dojo</p>;
-              }
+          {/* Select 2 */}
+          <FormControl sx={textfield}>
+            <Select
+              sx={{ height: 40, fontSize: 15 }}
+              displayEmpty
+              value={selectedCabang}
+              onChange={(e) => handleSelectCabang(e.target.value)}
+              // input={<OutlinedInput />}
 
-              return selected.join(", ");
-            }}
-            MenuProps={MenuProps}
-            inputProps={{ "aria-label": "Without label" }}
-          >
-            {provinsi.map((name) => (
-              <MenuItem
-                sx={{ fontSize: 15, height: 10 }}
-                key={name}
-                value={name}
-                style={getStyles(name, personName, theme)}
-              >
-                {name}
+              MenuProps={MenuProps}
+              inputProps={{ "aria-label": "Without label" }}
+            >
+              <MenuItem value="" disabled>
+                <p>Pilih Cabang</p>
               </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
+              {filterCabang.map((dojo) => (
+                <MenuItem
+                  sx={{ fontSize: 15, height: 10 }}
+                  key={dojo.id}
+                  value={dojo.name}
+                >
+                  {dojo.name}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
 
-        {/* Catatan */}
-        <Typography sx={{ fontSize: 14, mt: 1 }}>Alasan Pindah</Typography>
-        <TextField
-          placeholder="Udah Jago"
-          multiline
-          rows={3}
-          type="text"
-          sx={textfield}
-          inputProps={{
-            style: {
-              fontSize: 14,
-              height: 45,
-            },
-          }}
-        ></TextField>
-        <Typography sx={{ fontSize: 14, mt: 1 }}>Rencana Pindah</Typography>
+          {/* SELECT 3 */}
+          <FormControl sx={textfield}>
+            <Select
+              sx={{ height: 40, fontSize: 15 }}
+              displayEmpty
+              value={selectedDojo}
+              onChange={(e) => handleSelectDojo(e.target.value)}
+              input={<OutlinedInput />}
+              MenuProps={MenuProps}
+              inputProps={{ "aria-label": "Without label" }}
+            >
+              <MenuItem value="" disabled>
+                <p>Pilih Dojo</p>
+              </MenuItem>
+              {filterDojo.map((cabang) => (
+                <MenuItem
+                  sx={{ fontSize: 15, height: 10 }}
+                  key={cabang.id}
+                  value={cabang.name}
+                >
+                  {cabang.name}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
 
-        <LocalizationProvider dateAdapter={AdapterDateFns}>
-          <Stack spacing={7}>
-            <DesktopDatePicker
-              placeholder="Date desktop"
-              inputFormat="dd/MM/yyyy"
-              value={tanggalmutasi}
-              onChange={handleDate}
-              renderInput={(params) => <TextField {...params} sx={calendar} />}
-              sx={datePicker}
-            />
-          </Stack>
-        </LocalizationProvider>
-
-        {/* Button Floating */}
-        <Box sx={{ mt: 8 }}>
-          <AppBar
-            position="fixed"
-            sx={{
-              top: "auto",
-              bottom: 0,
-              bgcolor: "transparent",
+          {/* Catatan */}
+          <Typography sx={{ fontSize: 14, mt: 1 }}>Alasan Pindah</Typography>
+          <TextField
+            placeholder="Udah Jago"
+            multiline
+            rows={3}
+            value={alasanPindah}
+            onChange={(e) => setAlasanPindah(e.target.value)}
+            type="text"
+            sx={textfield}
+            inputProps={{
+              style: {
+                fontSize: 14,
+                height: 45,
+              },
             }}
-          >
-            <Box
+          ></TextField>
+          <Typography sx={{ fontSize: 14, mt: 1 }}>Rencana Pindah</Typography>
+
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <Stack spacing={7}>
+              <DesktopDatePicker
+                placeholder="Date desktop"
+                inputFormat="dd/MM/yyyy"
+                value={tanggalmutasi}
+                onChange={handleDate}
+                renderInput={(params) => (
+                  <TextField {...params} sx={calendar} />
+                )}
+                sx={datePicker}
+              />
+            </Stack>
+          </LocalizationProvider>
+
+          {/* Button Floating */}
+          <Box sx={{ mt: 8 }}>
+            <AppBar
+              position="fixed"
               sx={{
-                flexGrow: 1,
-                margin: "auto",
-                textAlign: "center",
-                width: "95%",
+                top: "auto",
+                bottom: 0,
+                bgcolor: "transparent",
               }}
             >
-              <Button variant="contained" disableRipple sx={SaveButton}>
-                Terima Mutasi
-              </Button>
-            </Box>
-          </AppBar>
-        </Box>
-      </Container>
+              <Box
+                sx={{
+                  flexGrow: 1,
+                  margin: "auto",
+                  textAlign: "center",
+                  width: "95%",
+                }}
+              >
+                <Button
+                  variant="contained"
+                  type="submit"
+                  disableRipple
+                  sx={SaveButton}
+                >
+                  Terima Mutasi
+                </Button>
+              </Box>
+            </AppBar>
+          </Box>
+        </Container>
+      </form>
     </>
   );
 }

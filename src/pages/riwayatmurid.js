@@ -6,9 +6,11 @@ import {
   Container,
   Grid,
   Typography,
+  IconButton,
 } from "@mui/material";
 import { SaveButton } from "../components/RiwayatMurid/Buttonfloating";
 import Navbar from "../components/Navbar";
+import { ArrowBackTwoTone } from "@mui/icons-material";
 
 import logoMutasi from "../img/logo.png";
 import Cards from "../components/Card";
@@ -21,7 +23,16 @@ import { Link } from "react-router-dom";
 export default function riwayatmurid() {
   return (
     <>
-      <Navbar>&nbsp;Riwayat Murid</Navbar>
+      <Navbar>
+        <Link to="/" style={{ textDecoration: "none" }}>
+          <IconButton sx={{ color: "#fff" }}>
+            <ArrowBackTwoTone />
+            <Typography sx={{ fontFamily: "Roboto", fontWeight: 500 }}>
+              &nbsp;Riwayat Murid
+            </Typography>
+          </IconButton>
+        </Link>
+      </Navbar>
       <Container>
         <Box sx={{ flexGrow: 1, mt: 8 }}>
           <Cards />

@@ -9,14 +9,7 @@ export default function Navbar(props) {
       position="fixed"
       sx={{ xs: 12, bgcolor: "#7349AC", pt: 1 }}
     >
-      <Box>
-        <IconButton sx={{ color: "#fff" }}>
-          <ArrowBackTwoTone />
-          <Typography sx={{ fontFamily: "Roboto", fontWeight: 700 }}>
-            {props.children}
-          </Typography>
-        </IconButton>
-      </Box>
+      <Box>{props.children}</Box>
     </AppBar>
   );
 }
