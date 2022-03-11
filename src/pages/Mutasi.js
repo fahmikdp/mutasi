@@ -12,7 +12,7 @@ import {
 import { SaveButton } from "../components/RiwayatMurid/Buttonfloating";
 import Navbar from "../components/Navbar";
 import Cards from "../components/Card";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { ArrowBackTwoTone } from "@mui/icons-material";
 
 // Select
@@ -27,7 +27,6 @@ import {
   cabang,
   dojo,
 } from "../components/Mutasi/DataSelect";
-import { useTheme } from "@mui/material/styles";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
@@ -49,9 +48,11 @@ export default function Mutasi() {
   const [filterDojo, setFilterDojo] = useState([]);
 
   const [selectedDojo, setDojo] = useState("");
+  const history = useHistory();
 
   const handleSubmit = function (event) {
     event.preventDefault();
+    history.push("/test");
     console.log(
       `\n`,
       `Dojo Asal: ${dojoAsal}`,
@@ -73,7 +74,7 @@ export default function Mutasi() {
     setProvinsi(newValue);
     console.log(newValue);
     const filtercabang = cabang.filter((e) => e.idprovinsi === newValue);
-    console.log(filtercabang);
+    // console.log(filtercabang);
     setFilterCabang(filtercabang);
   };
 
@@ -81,7 +82,7 @@ export default function Mutasi() {
     setCabang(newValue);
     console.log(newValue);
     const filterdojo = dojo.filter((e) => e.idcabang === newValue);
-    console.log(filterdojo);
+    // console.log(filterdojo);
     setFilterDojo(filterdojo);
   };
 
@@ -114,6 +115,7 @@ export default function Mutasi() {
           </Box>
           <Typography sx={{ fontSize: 14, mt: 2 }}>Dojo Asal</Typography>
           <TextField
+            required
             placeholder="Terakoya Dojo"
             type="text"
             value={dojoAsal}
@@ -131,6 +133,7 @@ export default function Mutasi() {
           {/* SELECT */}
           <FormControl sx={textfield}>
             <Select
+              required
               sx={{ height: 40, fontSize: 15 }}
               displayEmpty
               value={selectedProvinsi}
@@ -140,15 +143,24 @@ export default function Mutasi() {
               MenuProps={MenuProps}
               inputProps={{ "aria-label": "Without label" }}
             >
-              <MenuItem value="" disabled>
+              <MenuItem
+                value=""
+                disabled
+                sx={{
+                  fontSize: 15,
+                  minHeight: {
+                    xs: 2,
+                  },
+                }}
+              >
                 <p>Pilih Provinsi</p>
               </MenuItem>
               {provinsi.map((name) => (
                 <MenuItem
                   sx={{
                     fontSize: 15,
-                    height: {
-                      xs: 3,
+                    minHeight: {
+                      xs: 2,
                     },
                   }}
                   key={name.id}
@@ -163,6 +175,7 @@ export default function Mutasi() {
           {/* Select 2 */}
           <FormControl sx={textfield}>
             <Select
+              required
               sx={{ height: 40, fontSize: 15 }}
               displayEmpty
               value={selectedCabang}
@@ -172,12 +185,26 @@ export default function Mutasi() {
               MenuProps={MenuProps}
               inputProps={{ "aria-label": "Without label" }}
             >
-              <MenuItem value="" disabled>
+              <MenuItem
+                value=""
+                disabled
+                sx={{
+                  fontSize: 15,
+                  minHeight: {
+                    xs: 2,
+                  },
+                }}
+              >
                 <p>Pilih Cabang</p>
               </MenuItem>
               {filterCabang.map((dojo) => (
                 <MenuItem
-                  sx={{ fontSize: 15, height: 10 }}
+                  sx={{
+                    fontSize: 15,
+                    minHeight: {
+                      xs: 2,
+                    },
+                  }}
                   key={dojo.id}
                   value={dojo.name}
                 >
@@ -190,6 +217,7 @@ export default function Mutasi() {
           {/* SELECT 3 */}
           <FormControl sx={textfield}>
             <Select
+              required
               sx={{ height: 40, fontSize: 15 }}
               displayEmpty
               value={selectedDojo}
@@ -198,12 +226,26 @@ export default function Mutasi() {
               MenuProps={MenuProps}
               inputProps={{ "aria-label": "Without label" }}
             >
-              <MenuItem value="" disabled>
+              <MenuItem
+                value=""
+                disabled
+                sx={{
+                  fontSize: 15,
+                  minHeight: {
+                    xs: 2,
+                  },
+                }}
+              >
                 <p>Pilih Dojo</p>
               </MenuItem>
               {filterDojo.map((cabang) => (
                 <MenuItem
-                  sx={{ fontSize: 15, height: 10 }}
+                  sx={{
+                    fontSize: 15,
+                    minHeight: {
+                      xs: 2,
+                    },
+                  }}
                   key={cabang.id}
                   value={cabang.name}
                 >
@@ -213,9 +255,10 @@ export default function Mutasi() {
             </Select>
           </FormControl>
 
-          {/* Catatan */}
+          {/* Alasan Pindah */}
           <Typography sx={{ fontSize: 14, mt: 1 }}>Alasan Pindah</Typography>
           <TextField
+            required
             placeholder="Udah Jago"
             multiline
             rows={3}

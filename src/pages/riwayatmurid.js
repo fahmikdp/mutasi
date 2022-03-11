@@ -4,7 +4,6 @@ import {
   Button,
   Box,
   Container,
-  Grid,
   Typography,
   IconButton,
 } from "@mui/material";
@@ -48,6 +47,7 @@ export default function riwayatmurid() {
             <ListItem>
               <img
                 src={logoMutasi}
+                alt="Mutasi Icon"
                 style={{ marginRight: "17px", width: 25 }}
               />
               <Box sx={{ display: "block" }}>
@@ -63,6 +63,7 @@ export default function riwayatmurid() {
             <ListItem>
               <img
                 src={logoMutasi}
+                alt="Mutasi Icon"
                 style={{ marginRight: "17px", width: 25 }}
               />
               <Box sx={{ display: "block" }}>
