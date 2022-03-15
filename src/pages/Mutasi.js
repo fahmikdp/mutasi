@@ -52,7 +52,7 @@ export default function Mutasi() {
 
   const handleSubmit = function (event) {
     event.preventDefault();
-    history.push("/test");
+    history.push("/fasilitas");
     console.log(
       `\n`,
       `Dojo Asal: ${dojoAsal}`,
@@ -108,6 +108,8 @@ export default function Mutasi() {
           </IconButton>
         </Link>
       </Navbar>
+
+      {/* Form */}
       <form onSubmit={handleSubmit}>
         <Container>
           <Box sx={{ flexGrow: 1, mt: 8 }}>

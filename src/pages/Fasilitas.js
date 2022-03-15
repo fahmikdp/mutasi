@@ -10,42 +10,34 @@ import {
   Card,
   CardContent,
   Grid,
+  FormControl,
 } from "@mui/material";
 import Navbar from "../components/Navbar";
 import { ArrowBackTwoTone } from "@mui/icons-material";
+import MapsHomeWorkIcon from "@mui/icons-material/MapsHomeWorkOutlined";
+import CellWifiOutlinedIcon from "@mui/icons-material/CellWifiOutlined";
 import StorefrontOutlinedIcon from "@mui/icons-material/StorefrontOutlined";
 import { Link, useHistory } from "react-router-dom";
+
+import {
+  Umum,
+  Konek,
+  Terdekat,
+  DataFasilitas,
+  checkboxStyle,
+} from "../components/Fasilitas/DataAndStyle";
 import AC from "../img/ac.svg";
 import Wifi from "../img/wifi.svg";
 import { SaveButton } from "../components/RiwayatMurid/Buttonfloating";
-
-const Umum = [
-  " AC ",
-  " Ruang Latihan ",
-  " Ruang Medis ",
-  " Lapangan Latihan ",
-  " Ruang Ganti ",
-  " Toilet ",
-];
-
-const Konek = [" Wifi"];
-const Terdekat = [" Kantin ", " Tempat Parkir "];
-
-const checkboxStyle = {
-  color: "#7349AC",
-  marginLeft: -2,
-  "& svg": {
-    width: 20,
-    height: 20,
-    color: "#7349AC",
-  },
-};
+import _ from "lodash";
 
 export default function Test() {
+  // const [fasilitas, setFasilitas] = useState(DataFasilitas);
   // Checkbox state
   const [checkdata, setCheckdata] = useState([]);
   const [checkdata2, setCheckdata2] = useState([]);
   const [checkdata3, setCheckdata3] = useState([]);
+  const datacheck = [];
 
   const handleChangeChecked = (d) => {
     let fselected = [...checkdata];
@@ -58,6 +50,7 @@ export default function Test() {
       fselected.push(d);
       setCheckdata(fselected);
     }
+    // passingData();
   };
 
   const handleChangeChecked2 = (c) => {
@@ -76,7 +69,6 @@ export default function Test() {
   const handleChangeChecked3 = (c) => {
     let fselected2 = [...checkdata3];
     let selectedtrue2 = checkdata3.filter((x) => x === c);
-    // console.log(fselected)
 
     if (selectedtrue2.length > 0) {
       let withoutdouble2 = fselected2.filter((x) => x !== c);
@@ -87,6 +79,11 @@ export default function Test() {
     }
   };
 
+  // const passingData = () => {
+  //   let output = _.groupBy(DataFasilitas, "kategori");
+  //   setFasilitas(output);
+  // };
+
   //  Ambil data
   const history = useHistory();
 
@@ -95,7 +92,9 @@ export default function Test() {
     const ambildata2 = checkdata2;
     const ambildata3 = checkdata3;
 
-    history.push("/");
+    datacheck.push(ambildata, ambildata2, ambildata3);
+    // console.log(datacheck);
+    history.push("/fasilitas2");
     console.log(
       `\n`,
       `Umum: ${ambildata}`,
@@ -109,7 +108,7 @@ export default function Test() {
   return (
     <>
       <Navbar>
-        <Link to="/" style={{ textDecoration: "none" }}>
+        <Link to="/mutasi" style={{ textDecoration: "none" }}>
           <IconButton sx={{ color: "#fff" }}>
             <ArrowBackTwoTone />
             <Typography sx={{ fontFamily: "Roboto", fontWeight: 500 }}>
@@ -136,7 +135,8 @@ export default function Test() {
             <Grid container spacing={2}>
               <Grid item xs={1} md={1} lg={2}>
                 <Box sx={{ mt: 3, width: 50 }}>
-                  <img src={AC} alt="Air Conditioner Icon" />
+                  {/* <img src={AC} alt="Air Conditioner Icon" /> */}
+                  <MapsHomeWorkIcon />
                 </Box>
               </Grid>
 
@@ -149,18 +149,24 @@ export default function Test() {
                     Umum
                   </Typography>
                   {Umum.map((data) => (
-                    <Typography key={data} sx={{ fontSize: 14, mb: -1 }}>
-                      <Checkbox
-                        checked={
-                          checkdata.filter((item) => item == data).length > 0
-                            ? true
-                            : false
-                        }
-                        onClick={() => handleChangeChecked(data)}
-                        sx={checkboxStyle}
-                      />
-                      {data}
-                    </Typography>
+                    <Box
+                      key={data}
+                      onClick={() => handleChangeChecked(data)}
+                      width={"90%"}
+                    >
+                      <Typography sx={{ fontSize: 14, mb: -1 }}>
+                        <Checkbox
+                          checked={
+                            checkdata.filter((item) => item == data).length > 0
+                              ? true
+                              : false
+                          }
+                          // onClick={() => handleChangeChecked(data)}
+                          sx={checkboxStyle}
+                        />
+                        {data}
+                      </Typography>
+                    </Box>
                   ))}
                 </CardContent>
               </Grid>
@@ -182,7 +188,9 @@ export default function Test() {
             <Grid container spacing={2}>
               <Grid item xs={1} md={1} lg={2}>
                 <Box sx={{ mt: 3, width: 50 }}>
-                  <img src={Wifi} alt="Wifi Icon" />
+                  {/* <img src={Wifi} alt="Wifi Icon" />
+                   */}
+                  <CellWifiOutlinedIcon />
                 </Box>
               </Grid>
 
@@ -195,19 +203,25 @@ export default function Test() {
                     Konektivitas
                   </Typography>
                   {Konek.map((datas) => (
-                    <Typography key={datas} sx={{ fontSize: 14, mb: -1 }}>
-                      <Checkbox
-                        checked={
-                          checkdata2.filter((itemz) => itemz == datas).length >
-                          0
-                            ? true
-                            : false
-                        }
-                        onClick={() => handleChangeChecked2(datas)}
-                        sx={checkboxStyle}
-                      />
-                      {datas}
-                    </Typography>
+                    <Box
+                      key={datas}
+                      onClick={() => handleChangeChecked2(datas)}
+                      width={"90%"}
+                    >
+                      <Typography key={datas} sx={{ fontSize: 14, mb: -1 }}>
+                        <Checkbox
+                          checked={
+                            checkdata2.filter((itemz) => itemz == datas)
+                              .length > 0
+                              ? true
+                              : false
+                          }
+                          // onClick={() => handleChangeChecked2(datas)}
+                          sx={checkboxStyle}
+                        />
+                        {datas}
+                      </Typography>
+                    </Box>
                   ))}
                 </CardContent>
               </Grid>
@@ -242,18 +256,25 @@ export default function Test() {
                     Fasilitas Terdekat
                   </Typography>
                   {Terdekat.map((dekat) => (
-                    <Typography key={dekat} sx={{ fontSize: 14, mb: -1 }}>
-                      <Checkbox
-                        checked={
-                          checkdata3.filter((item) => item == dekat).length > 0
-                            ? true
-                            : false
-                        }
-                        onClick={() => handleChangeChecked3(dekat)}
-                        sx={checkboxStyle}
-                      />
-                      {dekat}
-                    </Typography>
+                    <Box
+                      key={dekat}
+                      onClick={() => handleChangeChecked3(dekat)}
+                      width={"90%"}
+                    >
+                      <Typography key={dekat} sx={{ fontSize: 14, mb: -1 }}>
+                        <Checkbox
+                          checked={
+                            checkdata3.filter((item) => item == dekat).length >
+                            0
+                              ? true
+                              : false
+                          }
+                          // onClick={() => handleChangeChecked3(dekat)}
+                          sx={checkboxStyle}
+                        />
+                        {dekat}
+                      </Typography>
+                    </Box>
                   ))}
                 </CardContent>
               </Grid>

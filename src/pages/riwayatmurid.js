@@ -15,6 +15,7 @@ import logoMutasi from "../img/logo.png";
 import Cards from "../components/Card";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
+import SwitchAccountIcon from "@mui/icons-material/SwitchAccount";
 import ReceiptIcon from "@mui/icons-material/ReceiptOutlined";
 import Divider from "@mui/material/Divider";
 import { Link } from "react-router-dom";
@@ -45,11 +46,12 @@ export default function riwayatmurid() {
             }}
           >
             <ListItem>
-              <img
+              {/* <img
                 src={logoMutasi}
                 alt="Mutasi Icon"
                 style={{ marginRight: "17px", width: 25 }}
-              />
+              /> */}
+              <SwitchAccountIcon sx={{ mr: 2 }} />
               <Box sx={{ display: "block" }}>
                 <Typography color="text.secondary" sx={{ fontSize: 12 }}>
                   12 Maret 2016
@@ -61,11 +63,12 @@ export default function riwayatmurid() {
             </ListItem>
             <Divider variant="inset" component="li" />
             <ListItem>
-              <img
+              {/* <img
                 src={logoMutasi}
                 alt="Mutasi Icon"
                 style={{ marginRight: "17px", width: 25 }}
-              />
+              /> */}
+              <SwitchAccountIcon sx={{ mr: 2 }} />
               <Box sx={{ display: "block" }}>
                 <Typography color="text.secondary" sx={{ fontSize: 12 }}>
                   28 Januari 2018
