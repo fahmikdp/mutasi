@@ -46,11 +46,6 @@ export default function riwayatmurid() {
             }}
           >
             <ListItem>
-              {/* <img
-                src={logoMutasi}
-                alt="Mutasi Icon"
-                style={{ marginRight: "17px", width: 25 }}
-              /> */}
               <SwitchAccountIcon sx={{ mr: 2 }} />
               <Box sx={{ display: "block" }}>
                 <Typography color="text.secondary" sx={{ fontSize: 12 }}>
@@ -63,11 +58,6 @@ export default function riwayatmurid() {
             </ListItem>
             <Divider variant="inset" component="li" />
             <ListItem>
-              {/* <img
-                src={logoMutasi}
-                alt="Mutasi Icon"
-                style={{ marginRight: "17px", width: 25 }}
-              /> */}
               <SwitchAccountIcon sx={{ mr: 2 }} />
               <Box sx={{ display: "block" }}>
                 <Typography color="text.secondary" sx={{ fontSize: 12 }}>

@@ -1,31 +1,44 @@
 import _ from "lodash";
 
-export const Umum = [
-  " AC ",
-  " Ruang Latihan ",
-  " Ruang Medis ",
-  " Lapangan Latihan ",
-  " Ruang Ganti ",
-  " Toilet ",
-];
+// export const Umum = [
+//   " AC ",
+//   " Ruang Latihan ",
+//   " Ruang Medis ",
+//   " Lapangan Latihan ",
+//   " Ruang Ganti ",
+//   " Toilet ",
+// ];
 
-export const Konek = [" Wifi"];
-export const Terdekat = [" ATM ", " Minimarket "];
+// export const Konek = [" Wifi"];
+// export const Terdekat = [" ATM ", " Minimarket "];
 
 // export const passingData = () => {
 export const DataFasilitas = [
-  { name: "AC", kategori: "Umum" },
-  { name: "Ruang Latihan", kategori: "Umum" },
-  { name: "Ruang Medis", kategori: "Umum" },
-  { name: "Lapangan Latihan", kategori: "Umum" },
-  { name: "Ruang Ganti", kategori: "Umum" },
-  { name: "Toilet", kategori: "Umum" },
-  { name: "Wifi", kategori: "Konek" },
-  { name: "Minimarket", kategori: "Terdekat" },
-  { name: "ATM", kategori: "Terdekat" },
+  { id: 1, name: "AC", kategori: "Umum" },
+  { id: 2, name: "Ruang Latihan", kategori: "Umum" },
+  { id: 3, name: "Ruang Medis", kategori: "Umum" },
+  { id: 4, name: "Lapangan Latihan", kategori: "Umum" },
+  { id: 5, name: "Ruang Ganti", kategori: "Umum" },
+  { id: 6, name: "Toilet", kategori: "Umum" },
+  { id: 7, name: "Wifi", kategori: "Konek" },
+  { id: 8, name: "Minimarket", kategori: "Terdekat" },
+  { id: 9, name: "ATM", kategori: "Terdekat" },
 ];
 let output = _.groupBy(DataFasilitas, "kategori");
 console.log(output);
+// };
+
+// export const Fasilitas = {
+//   umum: [
+//     " AC ",
+//     " Ruang Latihan ",
+//     " Ruang Medis ",
+//     " Lapangan Latihan ",
+//     " Ruang Ganti ",
+//     " Toilet ",
+//   ],
+//   konek: ["Wifi"],
+//   terdekat: [" ATM ", " Minimarket "],
 // };
 
 export const checkboxStyle = {
