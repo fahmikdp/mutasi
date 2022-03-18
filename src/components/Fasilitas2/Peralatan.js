@@ -4,7 +4,6 @@ import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
-  Grid,
   Button,
   AppBar,
   Box,
@@ -17,7 +16,10 @@ import { DataFasilitas } from "../Fasilitas/DataAndStyle";
 import { useLocation } from "react-router-dom";
 // icon
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+
 import MapsHomeWorkIcon from "@mui/icons-material/MapsHomeWorkOutlined";
+import CellWifiOutlinedIcon from "@mui/icons-material/CellWifiOutlined";
+import StorefrontOutlinedIcon from "@mui/icons-material/StorefrontOutlined";
 
 const Peralatan = (props) => {
   const newQueryParams = new URLSearchParams(useLocation().search);
@@ -66,16 +68,23 @@ const Peralatan = (props) => {
                 sx={{ borderRadius: 1 }}
                 style={{ backgroundColor: "#FFF" }}
               >
-                <MapsHomeWorkIcon />
+                {item.kategori === "Umum" ? (
+                  <MapsHomeWorkIcon />
+                ) : item.kategori === "Konektivitas" ? (
+                  <CellWifiOutlinedIcon />
+                ) : item.kategori === "Terdekat" ? (
+                  <StorefrontOutlinedIcon />
+                ) : null}
                 <Typography
                   color="text.secondary"
                   sx={{ fontSize: 15, fontFamily: "Roboto", ml: 1 }}
                 >
                   {item.kategori}
+                  {/* Umum */}
                 </Typography>
               </AccordionSummary>
-              {/* isi */}
 
+              {/* isi */}
               {item.data.map((data, index) => (
                 <AccordionDetails style={{ color: "#000" }}>
                   <List
@@ -131,7 +140,7 @@ const Peralatan = (props) => {
               sx={{
                 mb: 2,
                 borderRadius: 2,
-                // width: 0,
+                // width: 30,
                 height: 50,
                 fontSize: 30,
                 float: "right",

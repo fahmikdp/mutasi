@@ -160,7 +160,7 @@ export default function Test() {
                     Konektivitas
                   </Typography>
                   {fasilitas
-                    .filter((item) => item.kategori === "Konek")
+                    .filter((item) => item.kategori === "Konektivitas")
                     .map((datas, index) => (
                       <Box
                         key={index}
