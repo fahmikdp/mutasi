@@ -31,6 +31,7 @@ import OutlinedInput from "@mui/material/OutlinedInput";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
+import axios from "axios";
 
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
@@ -52,7 +53,7 @@ export default function Mutasi() {
 
   const handleSubmit = function (event) {
     event.preventDefault();
-    history.push("/fasilitas");
+    history.push("/showfasilitas");
     console.log(
       `\n`,
       `Dojo Asal: ${dojoAsal}`,
@@ -67,6 +68,17 @@ export default function Mutasi() {
       `\n`,
       `Rencana Pindah: ${tanggalmutasi}`
     );
+    const json = {
+      originDojo: dojoAsal,
+      province: selectedProvinsi,
+      branch: selectedCabang,
+      newDojo: selectedDojo,
+      whyMove: alasanPindah,
+      when: tanggalmutasi,
+    };
+    axios.post("http://localhost:100/mutasi/register", json).then((result) => {
+      console.log(result);
+    });
   };
 
   // SELECT FILTER

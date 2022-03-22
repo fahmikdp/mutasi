@@ -85,7 +85,7 @@ const Peralatan = (props) => {
               </AccordionSummary>
 
               {/* isi */}
-              {item.data.map((data, index) => (
+              {item.data.map((data) => (
                 <AccordionDetails style={{ color: "#000" }}>
                   <List
                     sx={{
