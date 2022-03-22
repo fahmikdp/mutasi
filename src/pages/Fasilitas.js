@@ -74,7 +74,7 @@ export default function Test() {
   return (
     <>
       <Navbar>
-        <Link to="/mutasi" style={{ textDecoration: "none" }}>
+        <Link to="/showmutasi" style={{ textDecoration: "none" }}>
           <IconButton sx={{ color: "#fff" }}>
             <ArrowBackTwoTone />
             <Typography sx={{ fontFamily: "Roboto", fontWeight: 500 }}>

@@ -53,7 +53,7 @@ export default function Mutasi() {
 
   const handleSubmit = function (event) {
     event.preventDefault();
-    history.push("/showfasilitas");
+    history.push("/showmutasi");
     console.log(
       `\n`,
       `Dojo Asal: ${dojoAsal}`,
