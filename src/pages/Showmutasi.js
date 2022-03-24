@@ -15,29 +15,20 @@ import {
 import { SaveButton } from "../components/RiwayatMurid/Buttonfloating";
 import Navbar from "../components/Navbar";
 import { Link } from "react-router-dom";
-import { useLocation } from "react-router-dom";
 import { ArrowBackTwoTone } from "@mui/icons-material";
 import axios from "axios";
 
 export default function Showfasilitas() {
-  //   const newQueryParams = new URLSearchParams(useLocation().search);
-  //   const dataChecked = JSON.parse(newQueryParams.get("data"));
+  const [datas, setData] = useState([]);
 
-  const [data, setData] = useState("");
-
-  const getDojo = () => {
-    axios
-      .get("http://localhost:100/mutasi/")
-      .then((res) => {
-        console.log(res.data.body);
-        setData(res.data.body);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  useEffect(getDojo);
+  useEffect(() => {
+    async function fetchData() {
+      const request = await axios.get("http://localhost:100/mutasi/");
+      setData(request.data);
+    }
+    fetchData();
+  }, []);
+  console.log(datas);
 
   return (
     <div>
@@ -46,42 +37,58 @@ export default function Showfasilitas() {
           <IconButton sx={{ color: "#fff" }}>
             <ArrowBackTwoTone />
             <Typography sx={{ fontFamily: "Roboto", fontWeight: 500 }}>
-              &nbsp;Serius mau Mutasi????
+              &nbsp;Serius mau Mutasi banh?
             </Typography>
           </IconButton>
         </Link>
       </Navbar>
       <Container>
         <Box sx={{ flexGrow: 1, mt: 8 }}>
-          <Typography>Apakah data yg diisi sudah benar?</Typography>
-          <Card
-            sx={{
-              maxWidth: 600,
-              xs: 12,
-              width: "100%",
-              margin: "auto",
-              mb: 1,
-              height: 200,
-              boxShadow: "0px 0px 6px #a1a1a1",
-            }}
-          >
-            <List
+          <Typography sx={{ mb: 1 }}>
+            Apakah data yg diisi sudah benar?
+          </Typography>
+          {datas.map((mutasi) => (
+            <Card
               sx={{
+                maxWidth: 600,
+                xs: 12,
                 width: "100%",
-                maxWidth: 300,
-                height: 20,
+                margin: "auto",
+                mb: 1,
+                height: 180,
+                boxShadow: "0px 0px 6px #a1a1a1",
               }}
             >
-              {data && (
-                <ListItem sx={{ mb: -1 }}>
+              <List
+                sx={{
+                  width: "100%",
+                  maxWidth: 370,
+                  height: 20,
+                }}
+              >
+                <ListItem sx={{ mb: -1, display: "block" }}>
                   <Typography sx={{ fontSize: 14 }}>
-                    {data}
-                    test aynkk
+                    Dojo Asal : {mutasi.originDojo}
+                  </Typography>
+                  <Typography sx={{ fontSize: 14 }}>
+                    Provinsi : {mutasi.province}
+                  </Typography>
+                  <Typography sx={{ fontSize: 14 }}>
+                    Cabang : {mutasi.branch}
+                  </Typography>
+                  <Typography sx={{ fontSize: 14 }}>
+                    Dojo Baru : {mutasi.newDojo}
+                  </Typography>
+                  <Typography sx={{ fontSize: 14 }}>
+                    Alasan Pindah : {mutasi.whyMove}
+                  </Typography>
+                  <Typography sx={{ fontSize: 14 }}>
+                    Rencana Pindah : {mutasi.when}
                   </Typography>
                 </ListItem>
-              )}
-            </List>
-          </Card>
+              </List>
+            </Card>
+          ))}
         </Box>
 
         {/* Button Floating */}
