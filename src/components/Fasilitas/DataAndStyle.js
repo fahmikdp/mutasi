@@ -2,43 +2,18 @@ import _ from "lodash";
 
 // export const passingData = () => {
 export const DataFasilitas = [
-  { id: 1, name: "AC", kategori: "Umum", icon: "MapsHomeWorkIcon" },
-  {
-    id: 2,
-    name: "Ruang Latihan",
-    kategori: "Umum",
-    icon: "MapsHomeWorkIcon",
-  },
-  { id: 3, name: "Ruang Medis", kategori: "Umum", icon: "MapsHomeWorkIcon" },
-  {
-    id: 4,
-    name: "Lapangan Latihan",
-    kategori: "Umum",
-    icon: "MapsHomeWorkIcon",
-  },
-  { id: 5, name: "Ruang Ganti", kategori: "Umum", icon: "MapsHomeWorkIcon" },
-  { id: 6, name: "Toilet", kategori: "Umum", icon: "MapsHomeWorkIcon" },
-  {
-    id: 7,
-    name: "Wifi",
-    kategori: "Konektivitas",
-    icon: "CellWifiOutlinedIcon",
-  },
-  {
-    id: 8,
-    name: "Minimarket",
-    kategori: "Terdekat",
-    icon: "StorefrontOutlinedIcon",
-  },
-  {
-    id: 9,
-    name: "ATM",
-    kategori: "Terdekat",
-    icon: "StorefrontOutlinedIcon",
-  },
+  { id: 1, name: "AC", kategori: "Umum" },
+  { id: 2, name: "Ruang Latihan", kategori: "Umum" },
+  { id: 3, name: "Ruang Medis", kategori: "Umum" },
+  { id: 4, name: "Lapangan Latihan", kategori: "Umum" },
+  { id: 5, name: "Ruang Ganti", kategori: "Umum" },
+  { id: 6, name: "Toilet", kategori: "Umum" },
+  { id: 7, name: "Wifi", kategori: "Konektivitas" },
+  { id: 8, name: "Minimarket", kategori: "Terdekat" },
+  { id: 9, name: "ATM", kategori: "Terdekat" },
 ];
-let output = _.groupBy(DataFasilitas, "kategori");
-console.log(output);
+// let output = _.groupBy(DataFasilitas, "kategori");
+// console.log(output);
 // };
 
 export const checkboxStyle = {
